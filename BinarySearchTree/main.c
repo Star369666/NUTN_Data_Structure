@@ -1,3 +1,4 @@
+//#define _CRT_SECURE_NO_WARNINGS	/* For Visual studio */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
 
 	while (1) {
 
-		if (!flag) {		//ÀË¬d¬O§_¬°²Ä¤@¦¸¨Ï¥Î(¬O§_«Ø¥ß¦nBST) 
+		if (!flag) {		//æª¢æŸ¥æ˜¯å¦ç‚ºç¬¬ä¸€æ¬¡ä½¿ç”¨(æ˜¯å¦å»ºç«‹å¥½BST) 
 			int inputKeys[100];
 			readKeysFromFile(inputKeys, &lengthOfKeys);
 			root = insertNode(root, inputKeys[0]);
@@ -51,37 +52,37 @@ int main(int argc, char* argv[]) {
 			}
 			printf("\n");
 			inoderTraversal(root);
-			flag++;			//¬ö¿ı¤w¨Ï¥Î¦Ü¤Ö¤@¦¸ 
+			flag++;			//ç´€éŒ„å·²ä½¿ç”¨è‡³å°‘ä¸€æ¬¡ 
 		}
 
-		printf("¥\¯à¿ï³æ:\n[1]·s¼Wkey­È\n[2]§R°£key­È\n[3]´M§äkey­È\n[4]´M§ä²Än¤pªºkey­È\n[5]¿é¥Xkey­È¥Ñ¤p¨ì¤jªº±Æ§Çµ²ªG\n[6]µ²§ôµ{¦¡\n½Ğ¿é¤J¿ï¾Ü: ");
+		printf("åŠŸèƒ½é¸å–®:\n[1]æ–°å¢keyå€¼\n[2]åˆªé™¤keyå€¼\n[3]å°‹æ‰¾keyå€¼\n[4]å°‹æ‰¾ç¬¬nå°çš„keyå€¼\n[5]è¼¸å‡ºkeyå€¼ç”±å°åˆ°å¤§çš„æ’åºçµæœ\n[6]çµæŸç¨‹å¼\nè«‹è¼¸å…¥é¸æ“‡: ");
 		scanf("%d", &choose);
 		printf("\n");
 
 		switch (choose) {
-			printf("¤w¿ï¾Ü[%d], ", choose);
+			printf("å·²é¸æ“‡[%d], ", choose);
 			int key;
 			case 1:
-				printf("½Ğ¿é¤J±ı¼W¥[ªº­È: ");
+				printf("è«‹è¼¸å…¥æ¬²å¢åŠ çš„å€¼: ");
 				scanf("%d", &key);
 				insertNode(root, key);
 				inoderTraversal(root);
 				break;
 			case 2:
-				printf("½Ğ¿é¤J±ı§R°£ªº­È: ");
+				printf("è«‹è¼¸å…¥æ¬²åˆªé™¤çš„å€¼: ");
 				scanf("%d", &key);
 				deleteNode(root, key);
 				inoderTraversal(root);
 				break;
 			case 3:
-				printf("½Ğ¿é¤J±ı´M§äªº­È: ");
+				printf("è«‹è¼¸å…¥æ¬²å°‹æ‰¾çš„å€¼: ");
 				scanf("%d", &key);
-				printf("´M§ä¸ô®|:");
+				printf("å°‹æ‰¾è·¯å¾‘:");
 				searchNode(root, key);
 				inoderTraversal(root);
 				break;
 			case 4:
-				printf("½Ğ¿é¤J±ı´M§ä²Ä´X¤pªº­È: ");
+				printf("è«‹è¼¸å…¥æ¬²å°‹æ‰¾ç¬¬å¹¾å°çš„å€¼: ");
 				scanf("%d", &key);
 				findNthSmallNode(root, key);
 				nthSmallCounter = 0;
@@ -93,7 +94,7 @@ int main(int argc, char* argv[]) {
 			case 6:
 				exit(0);
 			default:
-				printf("µL®Äªº¿ï¾Ü¡A½Ğ­«·s¿ï¾Ü\n");
+				printf("ç„¡æ•ˆçš„é¸æ“‡ï¼Œè«‹é‡æ–°é¸æ“‡\n");
 				break;
 		}
 		printf("\n");
@@ -105,39 +106,39 @@ int main(int argc, char* argv[]) {
 void readKeysFromFile(int* inputKeys, int* lengthOfKeys) {
 	char fileName[20];
 	int i = 0;
-										//Àò¨úÀÉ¦W¡A¨Ã¶}±ÒÀÉ®× 
-	printf("½Ğ«ü©w¤@©µ¦ùÀÉ¦W¬°\"txt\"ªºÀÉ®×Åª¨úkey­È§Ç¦C(¾ã¼Æ¥B¤£±o­«½Æ): ");
+										//ç²å–æª”åï¼Œä¸¦é–‹å•Ÿæª”æ¡ˆ 
+	printf("è«‹æŒ‡å®šä¸€å»¶ä¼¸æª”åç‚º\"txt\"çš„æª”æ¡ˆè®€å–keyå€¼åºåˆ—(æ•´æ•¸ä¸”ä¸å¾—é‡è¤‡): ");
 	scanf("%s", &fileName);
 	FILE* inputFile;
 	inputFile = fopen(fileName, "r");
 
-	while (!inputFile) {				//¦pªG¨S¦³¸ÓÀÉ®×¡A´N¦A¦¸Àò¨úÀÉ¦W 			
-		printf("µL®ÄªºÀÉ®×¦WºÙ¡A½Ğ­«·s¿é¤JÀÉ®×¦W: ");
+	while (!inputFile) {				//å¦‚æœæ²’æœ‰è©²æª”æ¡ˆï¼Œå°±å†æ¬¡ç²å–æª”å 			
+		printf("ç„¡æ•ˆçš„æª”æ¡ˆåç¨±ï¼Œè«‹é‡æ–°è¼¸å…¥æª”æ¡ˆå: ");
 		scanf("%s", &fileName);
 		inputFile = fopen(fileName, "r");
 	}
-										//Åª¤JÀÉ®×¤¤ªº©Ò¦³key­È 
+										//è®€å…¥æª”æ¡ˆä¸­çš„æ‰€æœ‰keyå€¼ 
 	while (fscanf(inputFile, "%d ", &inputKeys[i]) != EOF) {
 		i++;
 	}
 
-	*lengthOfKeys = i;					//¦sÅª¤Jkey­Èªº¼Æ¶q 				
+	*lengthOfKeys = i;					//å­˜è®€å…¥keyå€¼çš„æ•¸é‡ 				
 
 	fclose(inputFile);
 }
 
 treePointer buildRoot(int data) {
 	treePointer currentRoot;
-	currentRoot = (treePointer)malloc(sizeof(struct node));	//¥Ó½Ğ¤@­Ónodeªº°O¾ĞÅé 
-	currentRoot->data = data;					//³]©wroot¥]§tªº­È 
-	currentRoot->leftChild = NULL;				//¾ğ®Ú¨S¦³¥ª¤l¾ğ 
-	currentRoot->rightChild = NULL;				//¾ğ®Ú¨S¦³¥k¤l¾ğ 
+	currentRoot = (treePointer)malloc(sizeof(struct node));	//ç”³è«‹ä¸€å€‹nodeçš„è¨˜æ†¶é«” 
+	currentRoot->data = data;					//è¨­å®šrootåŒ…å«çš„å€¼ 
+	currentRoot->leftChild = NULL;				//æ¨¹æ ¹æ²’æœ‰å·¦å­æ¨¹ 
+	currentRoot->rightChild = NULL;				//æ¨¹æ ¹æ²’æœ‰å³å­æ¨¹ 
 	return currentRoot;
 }
 
-treePointer insertNode(treePointer root, int data) {	//§ä¨ì¸Ónodeªº¹w­p¦ì¸m 
-	if (isExistNode(root, data)) {				//­ninsertªº­È¤w¸g¦s¦b 
-		printf("%d­«½Æ¡AµLªk·s¼W\n", data);
+treePointer insertNode(treePointer root, int data) {	//æ‰¾åˆ°è©²nodeçš„é è¨ˆä½ç½® 
+	if (isExistNode(root, data)) {				//è¦insertçš„å€¼å·²ç¶“å­˜åœ¨ 
+		printf("%dé‡è¤‡ï¼Œç„¡æ³•æ–°å¢\n", data);
 		return root;
 	}
 
@@ -145,37 +146,37 @@ treePointer insertNode(treePointer root, int data) {	//§ä¨ì¸Ónodeªº¹w­p¦ì¸m
 
 	while (current) {
 		previous = current;
-		if (data > current->data) {				//¦pªG¼Æ­È¤ñ·í«eªºroot¤j¡AÀ³¸Ó§ä¥k¤l¾ğ
+		if (data > current->data) {				//å¦‚æœæ•¸å€¼æ¯”ç•¶å‰çš„rootå¤§ï¼Œæ‡‰è©²æ‰¾å³å­æ¨¹
 			current = current->rightChild;
 		}
-		else if (data < current->data) {		//¦pªG¼Æ­È¤ñ·í«eªºroot¤p¡A À³¸Ó§ä¥ª¤l¾ğ 
+		else if (data < current->data) {		//å¦‚æœæ•¸å€¼æ¯”ç•¶å‰çš„rootå°ï¼Œ æ‡‰è©²æ‰¾å·¦å­æ¨¹ 
 			current = current->leftChild;
 		}
 	}
-	//§ä¨ì¹w­p¦ì¸mªº¾ğ®Ú 
-	if (!previous) {							//¦pªG¤@¶}©l´N¬OªÅ¤l¾ğ¡A«Ø¥ßªì©l¾ğ®Ú 
+	//æ‰¾åˆ°é è¨ˆä½ç½®çš„æ¨¹æ ¹ 
+	if (!previous) {							//å¦‚æœä¸€é–‹å§‹å°±æ˜¯ç©ºå­æ¨¹ï¼Œå»ºç«‹åˆå§‹æ¨¹æ ¹ 
 		previous = buildRoot(data);
 	}
 	else {
-		if (data > previous->data) {			//¦pªG¸Ó­È¤j©ó¤l¾ğ®Ú­È¡A«Ø¥ß¥k¤l¾ğ 
+		if (data > previous->data) {			//å¦‚æœè©²å€¼å¤§æ–¼å­æ¨¹æ ¹å€¼ï¼Œå»ºç«‹å³å­æ¨¹ 
 			previous->rightChild = buildRoot(data);
 		}
-		else {									//¦pªG¸Ó­È¤p©ó¤l¾ğ®Ú´Ó¡A«Ø¥ß¥ª¤l¾ğ 
+		else {									//å¦‚æœè©²å€¼å°æ–¼å­æ¨¹æ ¹æ¤ï¼Œå»ºç«‹å·¦å­æ¨¹ 
 			previous->leftChild = buildRoot(data);
 		}
 	}
 
-	printf("¤w·s¼W%d\n", data);
-	return previous;							//«Ø¥ß§¹²¦						
+	printf("å·²æ–°å¢%d\n", data);
+	return previous;							//å»ºç«‹å®Œç•¢						
 }
 
 treePointer deleteNode(treePointer root, int data) {
-	if (!root) {								//ÀË¬d¬O§_¬°ªÅªºBST 
-		printf("ªÅªº¤G¤¸·j´M¾ğ¡A%dµLªk§R°£\n", data);
+	if (!root) {								//æª¢æŸ¥æ˜¯å¦ç‚ºç©ºçš„BST 
+		printf("ç©ºçš„äºŒå…ƒæœå°‹æ¨¹ï¼Œ%dç„¡æ³•åˆªé™¤\n", data);
 		return root;
 	}
 
-	treePointer currentRoot = root, previous = NULL;		//currentRoot = ­n³Q§R±¼ªºnode¡Aprevious = ­n³Q§R±¼ªºnodeªºparent 
+	treePointer currentRoot = root, previous = NULL;		//currentRoot = è¦è¢«åˆªæ‰çš„nodeï¼Œprevious = è¦è¢«åˆªæ‰çš„nodeçš„parent 
 
 	while (currentRoot && currentRoot->data != data) {
 		previous = currentRoot;
@@ -186,106 +187,106 @@ treePointer deleteNode(treePointer root, int data) {
 			currentRoot = currentRoot->leftChild;
 		}
 	}
-											//´M§ä§¹²¦¡A¥Ø«e¦ì¦b¹w­p§R°£ªºnodeªº¦ì¸m 
-	if (!currentRoot) {						//´M§ä¹L«á¦pªG§ä¤£¨ì = ¸Ó­È¤£¦s¦b©óBST¤¤ 
-		printf("¥¼§ä¨ì%d\n", data);
+											//å°‹æ‰¾å®Œç•¢ï¼Œç›®å‰ä½åœ¨é è¨ˆåˆªé™¤çš„nodeçš„ä½ç½® 
+	if (!currentRoot) {						//å°‹æ‰¾éå¾Œå¦‚æœæ‰¾ä¸åˆ° = è©²å€¼ä¸å­˜åœ¨æ–¼BSTä¸­ 
+		printf("æœªæ‰¾åˆ°%d\n", data);
 		return root;
 	}
 
-	if (!currentRoot->leftChild || !currentRoot->rightChild) {	//³Q§R°£ªºnode¥u¦³¤@­Ó¤l¾ğ 
+	if (!currentRoot->leftChild || !currentRoot->rightChild) {	//è¢«åˆªé™¤çš„nodeåªæœ‰ä¸€å€‹å­æ¨¹ 
 		treePointer replace;
 
-		if (!currentRoot->leftChild) {		//¸Ónode¥u¦³¥k¤l¾ğ 
+		if (!currentRoot->leftChild) {		//è©²nodeåªæœ‰å³å­æ¨¹ 
 			replace = currentRoot->rightChild;
 		}
-		else {								//¸Ónode¥u¦³¥ª¤l¾ğ 
+		else {								//è©²nodeåªæœ‰å·¦å­æ¨¹ 
 			replace = currentRoot->leftChild;
 		}
 
-		if (!previous) {						//§R°£ªºnode¦ì¸m¬Oroot¡Aª½±µ®³rootªº¤l¾ğ·í¦¨·sªºBST 
+		if (!previous) {						//åˆªé™¤çš„nodeä½ç½®æ˜¯rootï¼Œç›´æ¥æ‹¿rootçš„å­æ¨¹ç•¶æˆæ–°çš„BST 
 			return replace;
 		}
 
-		if (currentRoot == previous->leftChild) {	//¬İ³Q§R°£ªºnode¦ì¦b¨äparentªº¥ª/¥k¤l¾ğ¡A¨Ã§â·sªº¤l¾ğ±µ¤W 
+		if (currentRoot == previous->leftChild) {	//çœ‹è¢«åˆªé™¤çš„nodeä½åœ¨å…¶parentçš„å·¦/å³å­æ¨¹ï¼Œä¸¦æŠŠæ–°çš„å­æ¨¹æ¥ä¸Š 
 			previous->leftChild = replace;
 		}
 		else {
 			previous->rightChild = replace;
 		}
-		free(currentRoot);						//§R°£¸Ónode 
+		free(currentRoot);						//åˆªé™¤è©²node 
 	}
-	else {										//³Q§R°£ªºnode¦³¨â­Ó¤l¾ğ 
-		treePointer checker = NULL, successor = currentRoot->rightChild;	//´M§äsuccessorªº¦ì¸m¡A¥ı¶i¤J¥k¤l¾ğªº½d³ò 
+	else {										//è¢«åˆªé™¤çš„nodeæœ‰å…©å€‹å­æ¨¹ 
+		treePointer checker = NULL, successor = currentRoot->rightChild;	//å°‹æ‰¾successorçš„ä½ç½®ï¼Œå…ˆé€²å…¥å³å­æ¨¹çš„ç¯„åœ 
 															
-		while (successor->leftChild) {			//¦b¥k¤l¾ğ¤¤§ä¨ì³Ì¤pªºnode 
+		while (successor->leftChild) {			//åœ¨å³å­æ¨¹ä¸­æ‰¾åˆ°æœ€å°çš„node 
 			checker = successor;
 			successor = successor->leftChild;
 		}
-												//checker = ³Q§R°£node«Droot±¡ªp¤U¡Asuccessorªºparent 
+												//checker = è¢«åˆªé™¤nodeérootæƒ…æ³ä¸‹ï¼Œsuccessorçš„parent 
 		if (checker) {
-			checker->leftChild = successor->rightChild;		//«Droot³Q§R°£¡Asuccessor¸É¤W¤§«á¡A ±µ¤U¨Óªº¤l¾ğ±µ¨ìchecker¥ª¤l¾ğ 
+			checker->leftChild = successor->rightChild;		//érootè¢«åˆªé™¤ï¼Œsuccessorè£œä¸Šä¹‹å¾Œï¼Œ æ¥ä¸‹ä¾†çš„å­æ¨¹æ¥åˆ°checkerå·¦å­æ¨¹ 
 		}
-		else {									//¬Oroot³Q§R°£¡Asuccessor¸É¤W¤§«á¡A±µ¤U¨Óªº¤l¾ğ±µ¨ì³Q§R°£nodeªº¥k¤l¾ğ 
+		else {									//æ˜¯rootè¢«åˆªé™¤ï¼Œsuccessorè£œä¸Šä¹‹å¾Œï¼Œæ¥ä¸‹ä¾†çš„å­æ¨¹æ¥åˆ°è¢«åˆªé™¤nodeçš„å³å­æ¨¹ 
 			currentRoot->rightChild = successor->rightChild;
 		}
 
-		currentRoot->data = successor->data;	//§â³Q§R°£ªºnode­È§ï¦¨successorªº­È 
+		currentRoot->data = successor->data;	//æŠŠè¢«åˆªé™¤çš„nodeå€¼æ”¹æˆsuccessorçš„å€¼ 
 		free(successor);
 	}
 	return root;
 }
 
 treePointer searchNode(treePointer currentRoot, int key) {
-	while (currentRoot) {					//¦pªG¤£¬°ªÅ¤l¾ğ¡A¶}©l·j´M 
-		if (key == currentRoot->data) {		//»¼°j²×¤î±ø¥ó: ¦pªG§ä¨ì¸Ó­È¡Areturn·í«e¾ğ®Ú
-			printf(" %d, ¤w§ä¨ì%d\n", currentRoot->data, currentRoot->data);
+	while (currentRoot) {					//å¦‚æœä¸ç‚ºç©ºå­æ¨¹ï¼Œé–‹å§‹æœå°‹ 
+		if (key == currentRoot->data) {		//éè¿´çµ‚æ­¢æ¢ä»¶: å¦‚æœæ‰¾åˆ°è©²å€¼ï¼Œreturnç•¶å‰æ¨¹æ ¹
+			printf(" %d, å·²æ‰¾åˆ°%d\n", currentRoot->data, currentRoot->data);
 			return currentRoot;
 		}
-		else if (key < currentRoot->data) {	//¦pªG¸Ó­È¤p©ó·í«e¤l¾ğ¡A©¹¥ª¤l¾ğ§ä 
+		else if (key < currentRoot->data) {	//å¦‚æœè©²å€¼å°æ–¼ç•¶å‰å­æ¨¹ï¼Œå¾€å·¦å­æ¨¹æ‰¾ 
 			printf(" %d ->", currentRoot->data);
 			currentRoot = currentRoot->leftChild;
 		}
-		else {								//¦pªG¸Ó­È¤j©ó·í«e¤l¾ğ¡A©¹¥k¤l¾ğ§ä 
+		else {								//å¦‚æœè©²å€¼å¤§æ–¼ç•¶å‰å­æ¨¹ï¼Œå¾€å³å­æ¨¹æ‰¾ 
 			printf(" %d ->", currentRoot->data);
 			currentRoot = currentRoot->rightChild;
 		}
 	}
-	printf(" end, ¥¼§ä¨ì%d\n", key);
-	return NULL;							//¦pªG¬°ªÅ¤l¾ğ¡A©Î¬O§ä¤£¨ì¡A«hreturn NULL 
+	printf(" end, æœªæ‰¾åˆ°%d\n", key);
+	return NULL;							//å¦‚æœç‚ºç©ºå­æ¨¹ï¼Œæˆ–æ˜¯æ‰¾ä¸åˆ°ï¼Œå‰‡return NULL 
 }
 
 treePointer isExistNode(treePointer currentRoot, int key) {
-	while (currentRoot) {					//¦pªG¤£¬°ªÅ¤l¾ğ¡A¶}©l·j´M 
-		if (key == currentRoot->data) {		//»¼°j²×¤î±ø¥ó: ¦pªG§ä¨ì¸Ó­È¡Areturn·í«e¾ğ®Ú
+	while (currentRoot) {					//å¦‚æœä¸ç‚ºç©ºå­æ¨¹ï¼Œé–‹å§‹æœå°‹ 
+		if (key == currentRoot->data) {		//éè¿´çµ‚æ­¢æ¢ä»¶: å¦‚æœæ‰¾åˆ°è©²å€¼ï¼Œreturnç•¶å‰æ¨¹æ ¹
 			return currentRoot;
 		}
-		else if (key < currentRoot->data) {	//¦pªG¸Ó­È¤p©ó·í«e¤l¾ğ¡A©¹¥ª¤l¾ğ§ä 
+		else if (key < currentRoot->data) {	//å¦‚æœè©²å€¼å°æ–¼ç•¶å‰å­æ¨¹ï¼Œå¾€å·¦å­æ¨¹æ‰¾ 
 			currentRoot = currentRoot->leftChild;
 		}
-		else {								//¦pªG¸Ó­È¤j©ó·í«e¤l¾ğ¡A©¹¥k¤l¾ğ§ä 
+		else {								//å¦‚æœè©²å€¼å¤§æ–¼ç•¶å‰å­æ¨¹ï¼Œå¾€å³å­æ¨¹æ‰¾ 
 			currentRoot = currentRoot->rightChild;
 		}
 	}
-	return NULL;							//¦pªG¬°ªÅ¤l¾ğ¡A©Î¬O§ä¤£¨ì¡A«hreturn NULL 
+	return NULL;							//å¦‚æœç‚ºç©ºå­æ¨¹ï¼Œæˆ–æ˜¯æ‰¾ä¸åˆ°ï¼Œå‰‡return NULL 
 }
 
 treePointer findNthSmallNode(treePointer root, int nthNumber) {
-	if (!root) {			//ÀË¬d¬O§_¬°ªÅBST 
+	if (!root) {			//æª¢æŸ¥æ˜¯å¦ç‚ºç©ºBST 
 		return root;
 	}
-	//´M§ä¥ª¤l¾ğ¬O§_¦s¦b²Än¤p­È 
+	//å°‹æ‰¾å·¦å­æ¨¹æ˜¯å¦å­˜åœ¨ç¬¬nå°å€¼ 
 	treePointer left = findNthSmallNode(root->leftChild, nthNumber);
 
-	if (left) {			//¦b¥ª¤l¾ğ§ä¨ì²Än¤p­È¡A¦^¶Ç¥¦ 
+	if (left) {			//åœ¨å·¦å­æ¨¹æ‰¾åˆ°ç¬¬nå°å€¼ï¼Œå›å‚³å®ƒ 
 		return left;
 	}
 
-	nthSmallCounter++;	//¥ª¤l¾ğ§ä¨ì²ÄnthSmallCounter++¤p­È
-	if (nthSmallCounter == nthNumber) {	//§ä¨ì²Än­Ó³Ì¤p­È
-		printf("¤w§ä¨ì²Ä%d¤pªº­È%d\n", nthNumber, root->data);
+	nthSmallCounter++;	//å·¦å­æ¨¹æ‰¾åˆ°ç¬¬nthSmallCounter++å°å€¼
+	if (nthSmallCounter == nthNumber) {	//æ‰¾åˆ°ç¬¬nå€‹æœ€å°å€¼
+		printf("å·²æ‰¾åˆ°ç¬¬%då°çš„å€¼%d\n", nthNumber, root->data);
 		return root;
 	}
-	//©¹¥k¤l¾ğ§ä(¦]¬°¨º­Ó¬O¥¼·j´Mnodes¤¤³Ì¤p­È)
+	//å¾€å³å­æ¨¹æ‰¾(å› ç‚ºé‚£å€‹æ˜¯æœªæœå°‹nodesä¸­æœ€å°å€¼)
 	return findNthSmallNode(root->rightChild, nthNumber);
 }
 
@@ -296,7 +297,7 @@ void printQuickSort(treePointer root) {
 	getAllNodes(root, allNodes, &lengthOfKeys);
 	quickSort(allNodes, 0, lengthOfKeys - 1);
 
-	printf("Key­Èªº±Æ§Çµ²ªG(¥Ñ¤p¦Ü¤j):");
+	printf("Keyå€¼çš„æ’åºçµæœ(ç”±å°è‡³å¤§):");
 	for (i = 0; i < lengthOfKeys; i++) {
 		if (i == lengthOfKeys - 1) {
 			printf(" %d", allNodes[i]);
@@ -309,34 +310,34 @@ void printQuickSort(treePointer root) {
 }
 
 void quickSort(int* allNodes, int left, int right) {
-	if (left >= right) {					//¦pªG¥ªÃä¤j©ó¥kÃä¡A´N¸õ¥Xfunction
+	if (left >= right) {					//å¦‚æœå·¦é‚Šå¤§æ–¼å³é‚Šï¼Œå°±è·³å‡ºfunction
 		return;
 	}
 
-	int i = left, j = right, key = allNodes[left], temp;	//key = °ò·ÇÂI 
+	int i = left, j = right, key = allNodes[left], temp;	//key = åŸºæº–é» 
 
-	while (i < j) {						//¥ªÃä§ä¤ñ°ò·ÇÂI¤j¡A¥kÃä§ä¤ñ°ò·ÇÂI¤p 
+	while (i < j) {						//å·¦é‚Šæ‰¾æ¯”åŸºæº–é»å¤§ï¼Œå³é‚Šæ‰¾æ¯”åŸºæº–é»å° 
 		while (allNodes[j] > key && i < j) {
 			j--;
 		}
 		while (allNodes[i] < key && i < j) {
 			i++;
 		}
-		if (i < j) {						//¦¨¥\§ä¨ì´N¤¬´« 
+		if (i < j) {						//æˆåŠŸæ‰¾åˆ°å°±äº’æ› 
 			temp = allNodes[i];
 			allNodes[i] = allNodes[j];
 			allNodes[j] = temp;
 		}
 	}
-	allNodes[left] = allNodes[i];		//§â¥kÃä§ä¨ìªº¤p­È´«¨ì³Ì¥ª 
-	allNodes[i] = key;					//§â°ò·ÇÂI´«¨ìÂÂ¤p­È¦ì¸m 
+	allNodes[left] = allNodes[i];		//æŠŠå³é‚Šæ‰¾åˆ°çš„å°å€¼æ›åˆ°æœ€å·¦ 
+	allNodes[i] = key;					//æŠŠåŸºæº–é»æ›åˆ°èˆŠå°å€¼ä½ç½® 
 
-	quickSort(allNodes, left, i - 1);		//³B²z¥ªÃä¤l§Ç¦C 
-	quickSort(allNodes, i + 1, right);	//³B²z¥kÃä¤l§Ç¦C 
+	quickSort(allNodes, left, i - 1);		//è™•ç†å·¦é‚Šå­åºåˆ— 
+	quickSort(allNodes, i + 1, right);	//è™•ç†å³é‚Šå­åºåˆ— 
 }
 
 void getAllNodes(treePointer root, int* allNodes, int* lengthOfKeys) {
-	if (root) {							//¥Îinorder trarveral¬ö¿ı¦U­Ó¸`ÂI¡A¨Ãºâ¦n¸`ÂI¼Æ 
+	if (root) {							//ç”¨inorder trarveralç´€éŒ„å„å€‹ç¯€é»ï¼Œä¸¦ç®—å¥½ç¯€é»æ•¸ 
 		getAllNodes(root->leftChild, allNodes, lengthOfKeys);
 		int length = *lengthOfKeys;
 		allNodes[length++] = root->data;
@@ -347,17 +348,17 @@ void getAllNodes(treePointer root, int* allNodes, int* lengthOfKeys) {
 }
 
 void inorder(treePointer root) {
-	if (root) {		//ÀË¬d¬O§_¬°ªÅ¤l¾ğ¡A¦pªG¤£¬O¡A¿é¥X´M³Xµ²ªGª½¨ì¬°ªÅ¤l¾ğ  
+	if (root) {		//æª¢æŸ¥æ˜¯å¦ç‚ºç©ºå­æ¨¹ï¼Œå¦‚æœä¸æ˜¯ï¼Œè¼¸å‡ºå°‹è¨ªçµæœç›´åˆ°ç‚ºç©ºå­æ¨¹  
 		inorder(root->leftChild);
 		printf(" %d ->", root->data);
 		inorder(root->rightChild);
 	}
-	return;			//¦pªG¬OªÅ¤l¾ğ¡A¸õ¥X¨ç¦¡
+	return;			//å¦‚æœæ˜¯ç©ºå­æ¨¹ï¼Œè·³å‡ºå‡½å¼
 }
 
-void inoderTraversal(treePointer root) {	//¨Ïinorder¿é¥X§¹µ½(¥u¹B¦æ«DªÅBST) 
+void inoderTraversal(treePointer root) {	//ä½¿inorderè¼¸å‡ºå®Œå–„(åªé‹è¡Œéç©ºBST) 
 	if (root) {
-		printf("Inoder traversalµ²ªG:");
+		printf("Inoder traversalçµæœ:");
 		inorder(root);
 		printf(" end\n");
 	}
